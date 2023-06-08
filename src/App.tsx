@@ -49,7 +49,7 @@ export function App() {
       [metricData, imperialData] = await Promise.all(
         ["metric", "imperial"].map((unit) => getWeather(cityName, unit))
       );
-    } catch ({ message }) {
+    } catch (message) {
       handleError(message as string);
       return;
     }
@@ -96,15 +96,14 @@ export function App() {
   const handleError = (message: string) => {
     const errorMessage = (
       message === "Not Found"
-        ? "Please enter a valid city"
-        : "Your request is failed"
+        ? "Your request is failed"
+        : "Please enter a valid city"
     ) as string;
     setIsFetching(false);
     setErrorStatus({ errorStatus: true, errorMessage });
   };
 
   const handleSuccess = () => {
-    // (document.activeElement as HTMLElement).blur();
     clearQuery();
     setIsFetching(false);
     setErrorStatus(defaultError);
